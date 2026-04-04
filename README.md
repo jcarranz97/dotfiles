@@ -1,4 +1,4 @@
-# vim-borra-config
+# dotfiles
 
 # Install Latest Neovim
 Reference: https://github.com/neovim/neovim/releases/tag/nightly
@@ -11,9 +11,9 @@ sudo ln -s /home/jcarranz/.nvim/squashfs-root/usr/bin/nvim /usr/bin/nvim
 
 # Create symlinks
 ```
-ln -s /home/jcarranz/repos/vim-borra-config/.vimrc /home/jcarranz/.vimrc
-ln -s /home/jcarranz/repos/vim-borra-config/.jcarranz_rc /home/jcarranz/.jcarranz_rc
-ln -s /home/jcarranz/repos/vim-borra-config/.tmux.conf /home/jcarranz/.tmux.conf
+ln -s /home/jcarranz/repos/dotfiles/.vimrc /home/jcarranz/.vimrc
+ln -s /home/jcarranz/repos/dotfiles/.jcarranz_rc /home/jcarranz/.jcarranz_rc
+ln -s /home/jcarranz/repos/dotfiles/.tmux.conf /home/jcarranz/.tmux.conf
 ```
 
 # Modify VIMINIT
