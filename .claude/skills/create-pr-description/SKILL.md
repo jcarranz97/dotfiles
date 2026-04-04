@@ -134,6 +134,7 @@ Guidelines for the description body:
 - Group changes by logical area, not by file.
 - Lead each section with the problem that motivated the change, then the fix.
 - Use plain language and short sentences.
+- Do NOT use em dashes (—). Replace them with commas, semicolons, colons, or rewrite the sentence to avoid them entirely.
 - Do not list file names unless they are directly relevant to understanding the change.
 - Keep the intro short — 2-4 sentences max.
 - Apply all eight open source best practices from the top of this skill.
