@@ -129,13 +129,14 @@ or conventions you followed (or deviated from) and why. Omit this section if the
 ```
 
 Guidelines for the description body:
-- Group changes by logical area, not by file
-- Lead each section with the problem that motivated the change, then the fix
-- Use plain language, short sentences, no em dashes
-- Do not use contractions (use "do not" instead of "don't")
-- Do not list file names unless they are directly relevant to understanding the change
-- Keep the intro short — 2-4 sentences max
-- Apply all eight open source best practices from the top of this skill
+- Write for GitHub's markdown renderer: do NOT hard-wrap lines. Each paragraph or bullet should be a single long line so GitHub renders it correctly without spurious line breaks.
+- Use bullet points freely to list changes, steps, or items — they render well in GitHub and help reviewers scan quickly.
+- Group changes by logical area, not by file.
+- Lead each section with the problem that motivated the change, then the fix.
+- Use plain language and short sentences.
+- Do not list file names unless they are directly relevant to understanding the change.
+- Keep the intro short — 2-4 sentences max.
+- Apply all eight open source best practices from the top of this skill.
 
 ---
 
