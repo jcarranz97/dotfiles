@@ -27,20 +27,47 @@ Run:
 git branch --show-current
 ```
 
-If the current branch is `main`:
-- Tell the user: "It looks like you are on the main branch. I will create a draft PR description based on your modified files instead of a branch diff."
-- Skip to the **Modified files on main** flow below.
+If the current branch is `main`, stop immediately and tell the user:
+
+> "You are on the `main` branch. Please switch to a feature or fix branch before generating a PR description. There is nothing to compare against `main` from here."
+
+Do not proceed further.
 
 ---
 
-### 2. Standard flow: branch vs main
+### 2. Verify commits exist on the branch
 
 Get all commits on the current branch that are not on main:
 ```bash
 git log main..HEAD --format="%H %s"
 ```
 
-Get the full diff of all changes:
+If the output is empty (no commits), stop and tell the user:
+
+> "The branch `<branch-name>` has no commits ahead of `main` yet. Please make and commit your changes before generating a PR description."
+
+Do not proceed further.
+
+---
+
+### 3. Ask the user for PR context
+
+Before analyzing the diff, ask the user:
+
+> "Before I draft the PR description, could you give me some context?
+>
+> - Is this a **bug fix**, **new feature**, **documentation update**, **refactor**, or something else?
+> - What was the problem or motivation that led to this change? A short sentence or two is enough, or you can share a path to a `.md` file with more details.
+>
+> (If you already have a GitHub issue number, share it and I will reference it in the description.)"
+
+Wait for the user's answer before proceeding. If the user provides a `.md` file path, read that file and use its contents as context for the description.
+
+---
+
+### 4. Gather the committed diff
+
+Get the full diff of all **committed** changes (do not include uncommitted or staged-only files):
 ```bash
 git diff main..HEAD
 ```
@@ -50,19 +77,14 @@ Get only the list of changed files and whether they are modified (M), added (A),
 git diff main..HEAD --name-status
 ```
 
----
-
-### 3. Modified files on main flow
-
-If on main, get the current uncommitted changes instead:
+Also look at recent commits on main to confirm the commit convention in use:
 ```bash
-git diff --name-status
-git diff
+git log main --oneline -20
 ```
 
 ---
 
-### 4. Identify new files and ask the user
+### 5. Identify new files and ask the user
 
 From the `--name-status` output, separate files by status:
 - **Modified (M):** always include in the analysis
@@ -81,17 +103,17 @@ Wait for the user's answer before proceeding.
 
 ---
 
-### 5. Detect commit convention
+### 6. Detect commit convention
 
-Look at the commit subjects from step 2 (or recent git log if on main) to detect whether the project uses Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:` etc.). Also check if commits use scopes like `docs(readme):`.
+Look at the commit subjects from step 4 to detect whether the project uses Conventional Commits (`feat:`, `fix:`, `docs:`, `chore:` etc.). Also check if commits use scopes like `docs(readme):`.
 
 Use the detected convention to suggest the PR title. If no convention is detected, use a plain descriptive title.
 
 ---
 
-### 6. Draft the PR description
+### 7. Draft the PR description
 
-Using the diff, commit history, and the open source best practices listed above, produce a PR description with the following structure:
+Using the diff, commit history, the user's context from step 3, and the open source best practices listed above, produce a PR description with the following structure:
 
 ```
 # <type(scope): short description of the PR>
@@ -141,7 +163,7 @@ Guidelines for the description body:
 
 ---
 
-### 7. Save the description to a file
+### 8. Save the description to a file
 
 After drafting the description, save it to a file at the repo root:
 
@@ -158,7 +180,7 @@ If `pr-description.md` already exists, overwrite it without asking — it is alw
 
 ---
 
-### 8. Present and offer refinements
+### 9. Present and offer refinements
 
 Show the draft inline in the chat as well (do not make the user open the file to see it), then ask:
 - "Does this capture everything? Let me know if you want to adjust the tone, add more detail to any section, or change the title. Once you are happy with it, `pr-description.md` is ready to paste into GitHub."
