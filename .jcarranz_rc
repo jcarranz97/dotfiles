@@ -1,13 +1,13 @@
 # Juan Config
 echo "Welcome back Sir!!"
-export MYVIMRC=/home/jcarranz/.vimrc
+export MYVIMRC=$HOME/.vimrc
 export VIMINIT='source $MYVIMRC'
 
 alias vim='nvim'
 
 # Raspberry Pico SDK Path
-export PICO_SDK_PATH=/home/jcarranz/repos/pico-sdk
-export PICO_EXTRAS_PATH=/home/jcarranz/repos/pico-extras
+export PICO_SDK_PATH=$HOME/repos/pico-sdk
+export PICO_EXTRAS_PATH=$HOME/repos/pico-extras
 
 # Source ROS2 humble (if found)
 if [ -f /opt/ros/humble/setup.bash ]; then
@@ -36,7 +36,7 @@ if test -f /usr/local/bin/oh-my-posh; then
     eval "$(oh-my-posh --init --shell bash --config ~/.poshthemes/$POSH_THEME.omp.json )"
 fi
 
-alias venv='source /home/jcarranz/venvs/default_venv/bin/activate'
+alias venv='source $HOME/venvs/default_venv/bin/activate'
 
 # WSL Clipboard helper
 # clip.exe expects UTF-16 LE encoding, but WSL uses UTF-8. Piping UTF-8 text
