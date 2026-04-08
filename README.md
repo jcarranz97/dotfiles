@@ -1,12 +1,18 @@
 # dotfiles
 
 # Install Latest Neovim
-Reference: https://github.com/neovim/neovim/releases/tag/nightly
+Reference: https://github.com/neovim/neovim/blob/master/INSTALL.md#linux
+
+Download and extract the pre-built archive from the [Releases page](https://github.com/neovim/neovim/releases):
 ```
-wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
-chmod u+x nvim.appimage
-./nvim.appimage --appimage-extract
-sudo ln -s $HOME/.nvim/squashfs-root/usr/bin/nvim /usr/bin/nvim
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+sudo rm -rf /opt/nvim-linux-x86_64
+sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+```
+
+Then add this to your shell config (`~/.bashrc`, `~/.zshrc`, ...):
+```
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 ```
 
 # Create symlinks
