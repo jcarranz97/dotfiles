@@ -37,3 +37,12 @@ if test -f /usr/local/bin/oh-my-posh; then
 fi
 
 alias venv='source /home/jcarranz/venvs/default_venv/bin/activate'
+
+# WSL Clipboard helper
+# clip.exe expects UTF-16 LE encoding, but WSL uses UTF-8. Piping UTF-8 text
+# directly to clip.exe garbles multi-byte characters (arrows, box-drawing, etc.).
+# This wrapper converts the encoding before passing to clip.exe.
+# Usage: clip < file.txt  or  echo "text" | clip
+clip() {
+    iconv -f UTF-8 -t UTF-16LE | clip.exe
+}
