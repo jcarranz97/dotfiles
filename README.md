@@ -6,14 +6,14 @@ Reference: https://github.com/neovim/neovim/releases/tag/nightly
 wget https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 chmod u+x nvim.appimage
 ./nvim.appimage --appimage-extract
-sudo ln -s /home/jcarranz/.nvim/squashfs-root/usr/bin/nvim /usr/bin/nvim
+sudo ln -s $HOME/.nvim/squashfs-root/usr/bin/nvim /usr/bin/nvim
 ```
 
 # Create symlinks
 ```
-ln -s /home/jcarranz/repos/dotfiles/.vimrc /home/jcarranz/.vimrc
-ln -s /home/jcarranz/repos/dotfiles/.jcarranz_rc /home/jcarranz/.jcarranz_rc
-ln -s /home/jcarranz/repos/dotfiles/.tmux.conf /home/jcarranz/.tmux.conf
+ln -s $HOME/repos/dotfiles/.vimrc $HOME/.vimrc
+ln -s $HOME/repos/dotfiles/.jcarranz_rc $HOME/.jcarranz_rc
+ln -s $HOME/repos/dotfiles/.tmux.conf $HOME/.tmux.conf
 ```
 
 # Claude Code setup
@@ -24,8 +24,8 @@ because it contains credentials, history, and auto-managed plugin data that
 should not be in git.
 
 ```
-ln -s /home/jcarranz/repos/dotfiles/.claude/skills /home/jcarranz/.claude/skills
-ln -s /home/jcarranz/repos/dotfiles/.claude/settings.json /home/jcarranz/.claude/settings.json
+ln -s $HOME/repos/dotfiles/.claude/skills $HOME/.claude/skills
+ln -s $HOME/repos/dotfiles/.claude/settings.json $HOME/.claude/settings.json
 ```
 
 The `skills/` symlink makes all custom skills available globally in every
@@ -34,7 +34,7 @@ automatically picked up once the symlink is in place.
 
 # Modify VIMINIT
 ```
-export MYVIMRC=/home/jcarranz/.vimrc
+export MYVIMRC=$HOME/.vimrc
 export VIMINIT='source $MYVIMRC'
 ```
 
