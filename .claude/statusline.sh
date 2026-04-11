@@ -23,10 +23,15 @@ GREEN='\033[32m'
 YELLOW='\033[33m'
 RED='\033[31m'
 DIM='\033[2m'
+MAGENTA='\033[35m'
 
 # --- CWD ---
 cwd=$(echo "$input" | jq -r '.cwd // "?"')
 cwd_short=$(sed "s|^/home/$USER|~|" <<< "$cwd")
+
+# --- Git branch ---
+branch=$(git -C "$cwd" branch --show-current 2>/dev/null)
+[ -n "$branch" ] && branch_str="   $branch" || branch_str=""
 
 # --- Model ---
 model=$(echo "$input" | jq -r '.model.display_name // "Unknown"')
@@ -57,5 +62,5 @@ secs=$(( elapsed % 60 ))
 duration_str=$(printf '%02d:%02d:%02d' "$hrs" "$mins" "$secs")
 
 # --- Output ---
-printf "📁 ${CYAN}${BOLD}%s${RESET}  🤖 ${DIM}%s${RESET}  🔋 ${bar_color}%s${RESET} ${used_int}%%  💰 ${YELLOW}%s${RESET}  ⏱ %s\n" \
-  "$cwd_short" "$model" "$bar" "$cost_str" "$duration_str"
+printf "📁 ${CYAN}%s${RESET}${MAGENTA}%s${RESET}  🤖 ${DIM}%s${RESET}  🔋 ${bar_color}%s${RESET} ${used_int}%%  💰 ${YELLOW}%s${RESET}  ⏱ %s\n" \
+  "$cwd_short" "$branch_str" "$model" "$bar" "$cost_str" "$duration_str"
