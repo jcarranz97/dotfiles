@@ -41,7 +41,7 @@ Claude Code runs the script after each assistant message, passing a JSON blob vi
 ## Current bar output
 
 ```
-📁 ~/repos/dotfiles  main  🤖 Sonnet 4.6  🔋 ██░░░░░░░░ 16%  💰 $0.4888  ⏱ 00:15:21
+📁 ~/repos/dotfiles  main  🤖 Sonnet 4.6  🔋 ██░░░░░░░░ 16%  💰 $0.4888  ⏱ 00:15:21  ⚡ 5h: 10% (↺14:00)  7d: 1% (↺Sun Apr 20)
 ```
 
 - **📁 CWD** — cyan, bold. Shows `~` instead of `/home/$USER`
@@ -50,6 +50,9 @@ Claude Code runs the script after each assistant message, passing a JSON blob vi
 - **🔋 Context bar** — color-coded: green (0–69%), yellow (70–89%), red (90%+). Uses `█`/`░` block characters.
 - **💰 Cost** — yellow, 4 decimal places
 - **⏱ Duration** — total wall-clock time for the session
+- **⚡ Rate limits** — only shown on Pro/Max accounts. Color-coded: green (0–69%), yellow (70–89%), red (90%+).
+  - `5h` — 5-hour rolling window usage. `↺HH:MM` shows the local time it resets.
+  - `7d` — 7-day rolling window usage. `↺Day Mon DD` shows the date it resets.
 
 ## Colors reference
 
