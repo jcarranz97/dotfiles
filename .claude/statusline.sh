@@ -31,7 +31,7 @@ cwd_short=$(sed "s|^/home/$USER|~|" <<< "$cwd")
 
 # --- Git branch ---
 branch=$(git -C "$cwd" branch --show-current 2>/dev/null)
-[ -n "$branch" ] && branch_str="   $branch" || branch_str=""
+[ -n "$branch" ] && branch_str="  $branch" || branch_str=""
 
 # --- Model ---
 model=$(echo "$input" | jq -r '.model.display_name // "Unknown"')
