@@ -38,6 +38,32 @@ REQUIRED_TOOLS=("jq" "git")
 
 Claude Code runs the script after each assistant message, passing a JSON blob via **stdin**. Whatever the script prints to stdout becomes the status bar.
 
+## Current bar output
+
+```
+📁 ~/repos/dotfiles  main  🤖 Sonnet 4.6  🔋 ██░░░░░░░░ 16%  💰 $0.4888  ⏱ 00:15:21
+```
+
+- **📁 CWD** — cyan, bold. Shows `~` instead of `/home/$USER`
+- **branch** — magenta. Only shown when inside a git repo. Hidden otherwise.
+- **🤖 Model** — dimmed
+- **🔋 Context bar** — color-coded: green (0–69%), yellow (70–89%), red (90%+). Uses `█`/`░` block characters.
+- **💰 Cost** — yellow, 4 decimal places
+- **⏱ Duration** — total wall-clock time for the session
+
+## Colors reference
+
+```bash
+RESET='\033[0m'
+BOLD='\033[1m'
+DIM='\033[2m'
+CYAN='\033[36m'      # CWD
+MAGENTA='\033[35m'   # git branch
+GREEN='\033[32m'     # context bar low usage
+YELLOW='\033[33m'    # context bar medium / cost
+RED='\033[31m'       # context bar high usage
+```
+
 ## Current settings.json config
 
 ```json
@@ -52,12 +78,6 @@ Claude Code runs the script after each assistant message, passing a JSON blob vi
 Optional extra fields:
 - `"padding": 2` — extra horizontal spacing
 - `"refreshInterval": 1` — re-run every N seconds even when idle (makes duration tick in real-time)
-
-## Current bar output
-
-```
-Sonnet 4.6  ctx [##--------] 16%  cost $0.4888  dur 00:15:21
-```
 
 ## Full JSON schema (stdin input)
 
@@ -158,18 +178,5 @@ five_h=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // 0')
 printf '... | 5h limit: %s%%' "$five_h"
 ```
 
-### Add git branch
-```bash
-branch=$(git -C "$cwd" branch --show-current 2>/dev/null)
-[ -n "$branch" ] && printf ' | branch: %s' "$branch"
-```
-
 ### Make duration tick in real-time
 Add `"refreshInterval": 1` to the `statusLine` block in `~/.claude/settings.json`.
-
-### Color output
-Use ANSI escape codes:
-```bash
-GREEN='\033[32m'; YELLOW='\033[33m'; RESET='\033[0m'
-printf "${GREEN}%s${RESET}" "$model"
-```
