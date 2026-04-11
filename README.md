@@ -32,6 +32,7 @@ should not be in git.
 ```
 ln -s $HOME/repos/dotfiles/.claude/skills $HOME/.claude/skills
 ln -s $HOME/repos/dotfiles/.claude/settings.json $HOME/.claude/settings.json
+ln -s $HOME/repos/dotfiles/.claude/statusline.sh $HOME/.claude/statusline.sh
 ```
 
 The `skills/` symlink makes all custom skills available globally in every
