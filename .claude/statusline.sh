@@ -39,6 +39,7 @@ fi
 RESET=$'\033[0m'
 BOLD=$'\033[1m'
 DIM=$'\033[2m'
+STRIKETHROUGH=$'\033[9m'
 CYAN=$'\033[36m'
 GREEN=$'\033[32m'
 YELLOW=$'\033[33m'
@@ -191,8 +192,11 @@ section_stock() {
 
     # Build per-ticker entry
     local entry
-    entry=$(printf "%s ${YELLOW}\$%.2f${RESET}" "$ticker" "$price")
-    [ "$age" -gt "$STOCK_STALE_TTL" ] && entry+=" (⚠️ $(format_countdown $age) ago)"
+    if [ "$age" -gt "$STOCK_STALE_TTL" ]; then
+      entry=$(printf "%s ${STRIKETHROUGH}${YELLOW}\$%.2f${RESET} (⚠️$(format_countdown $age) ago)" "$ticker" "$price")
+    else
+      entry=$(printf "%s ${YELLOW}\$%.2f${RESET}" "$ticker" "$price")
+    fi
 
     [ -n "$result" ] && result+="  "
     result+="$entry"

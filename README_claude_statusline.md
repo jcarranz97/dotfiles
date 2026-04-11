@@ -156,11 +156,12 @@ Colors use `$'...'` syntax so they contain real ESC bytes and can be safely embe
 RESET=$'\033[0m'
 BOLD=$'\033[1m'
 DIM=$'\033[2m'
-CYAN=$'\033[36m'      # CWD
-MAGENTA=$'\033[35m'   # git branch
-GREEN=$'\033[32m'     # low usage
-YELLOW=$'\033[33m'    # medium usage / cost / stock price
-RED=$'\033[31m'       # high usage
+STRIKETHROUGH=$'\033[9m'  # stale stock price
+CYAN=$'\033[36m'           # CWD
+MAGENTA=$'\033[35m'        # git branch
+GREEN=$'\033[32m'          # low usage
+YELLOW=$'\033[33m'         # medium usage / cost / stock price
+RED=$'\033[31m'            # high usage
 ```
 
 ### Full JSON schema (stdin input)
